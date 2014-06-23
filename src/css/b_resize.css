@@ -1,0 +1,89 @@
+/* Webkit */
+@-webkit-keyframes resize--color {
+  0% {
+    background: green;
+  }
+  60% {
+    background: green;
+  }
+  63% {
+    background: yellow;
+  }
+  100% {
+    background: yellow;
+  }
+}
+
+@-webkit-keyframes resize--width {
+  0% {
+    width: 10%;
+  }
+  100% {
+    width: 90%;
+  }
+}
+
+@-webkit-keyframes resize--content {
+  0% {
+    opacity: 0;
+  }
+  53% {
+    opacity: 0;
+  }
+  63% {
+    opacity: 1;
+  }
+}
+
+/* Errybody else */
+@keyframes resize--color {
+  0% {
+    background: green;
+  }
+  60% {
+    background: green;
+  }
+  63% {
+    background: yellow;
+  }
+  100% {
+    background: yellow;
+  }
+}
+
+@keyframes resize--width {
+  0% {
+    width: 10%;
+  }
+  100% {
+    width: 90%;
+  }
+}
+
+@keyframes resize--content {
+  0% {
+    opacity: 0;
+  }
+  53% {
+    opacity: 0;
+  }
+  63% {
+    opacity: 1;
+  }
+}
+
+
+.b-resize--color {
+  -webkit-animation: resize--color 1.5s ease-in-out 0s infinite alternate;
+  animation: resize--color 1.5s ease-in-out 0s infinite alternate;
+}
+
+.b-resize--width {
+  -webkit-animation: resize--width 1.5s ease-in-out 0s infinite alternate;
+  animation: resize--width 1.5s ease-in-out 0s infinite alternate;
+}
+
+.b-resize--content {
+  -webkit-animation: resize--content 1.5s ease-in-out 0s infinite alternate;
+  animation: resize--content 1.5s ease-in-out 0s infinite alternate;
+}

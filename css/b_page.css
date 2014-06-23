@@ -1,0 +1,105 @@
+.reveal pre {
+  font-size: 1em;
+}
+
+.b-page {
+  background: #000;
+  border: 2px solid #fff !important;
+  border-radius: 10px;
+  color: #000;
+  height: 80%;
+  margin: 0 auto !important;
+  min-height: 300px;
+  padding: 30px !important;
+  width: 60%;
+}
+
+.b-page__heading {
+  background: #fff;
+  font-weight: bold !important;
+  margin-bottom: 10px !important;
+  padding: 30px !important;
+  text-align: center;
+}
+
+.b-page__h2 {
+  color: #fff;
+  font-weight: bold !important;
+  text-align: left;
+}
+
+.b-page__content {
+  overflow: hidden;
+  position: relative;
+}
+
+.b-page__sidebar,
+.b-page__sidebar--mini {
+  background: #fff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  float: left;
+  height: 250px;
+  width: 30%;
+  padding: 10px;
+}
+.b-page__sidebar--mini {
+  height: 100px;
+}
+
+.b-page__container {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.b-page__main,
+.b-page__main--left {
+  float: right;
+  overflow: hidden;
+  width: 68%;
+}
+
+.b-page__main--left {
+  float: left;
+}
+
+.b-page__post {
+  background: #fff;
+  border-radius: 5px;
+  height: 100px;
+  margin-bottom: 10px !important;
+}
+
+.b-page__product {
+  background: #fff;
+  border-radius: 5px;
+  float: left;
+  height: 80px;
+  margin: 0 10px 10px 0 !important;
+  width: 80px;
+}
+
+.b-page__iframe {
+  border: 1px solid #fff !important;
+  border-radius:;
+  padding: 30px !important;
+  min-height: 200px;
+}
+
+.b-avatar {
+  border-radius: 200px;
+  height: 100px;
+  width: 100px;
+  background: red;
+  margin: 10px auto !important;
+}
+
+.b-avatar--post {
+  border-radius: 200px;
+  height: 40px;
+  width: 40px;
+  background: red;
+  position: relative;
+  top: 10px;
+  left: 10px;
+}

@@ -1,0 +1,23 @@
+@-webkit-keyframes flash {
+  0% {
+    background: #fff;
+  }
+  10% {
+    background: #f00;
+  }
+  20% {
+    background: #fff;
+  }
+}
+
+.b-flash-1 {
+  -webkit-animation: flash 3s linear 0s infinite;
+}
+
+.b-flash-2 {
+  -webkit-animation: flash 3s linear 0.7s infinite;
+}
+
+.b-flash-3 {
+  -webkit-animation: flash 3s linear 1.4s infinite;
+}

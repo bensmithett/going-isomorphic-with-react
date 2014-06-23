@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>CSS Architecture on a Shoestring</title>
+
+    <meta name="description" content="Slides for a talk I gave at Be Responsive Melbourne in January 2014.">
+    <meta name="author" content="Ben Smithett">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/night.css" id="theme">
+    <link rel="stylesheet" href="css/b_flash.css">
+    <link rel="stylesheet" href="css/b_resize.css">
+    <link rel="stylesheet" href="css/b_page.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-17358351-5', 'bensmithett.github.io');
+      ga('send', 'pageview');
+    </script>
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+<section data-markdown>
+  # CSS Architecture
+  ## on a Shoestring
+  [@bensmithett](https://twitter.com/bensmithett)
+</section>
+
+<section data-markdown>
+  ![](img/envato.png)
+</section>
+
+<section data-markdown>
+  ## Once upon a time...
+
+  - One huge CSS file
+  - No real structure
+  - New features? Kinda just added stuff to the bottom
+</section>
+
+<section data-markdown>
+  ## OOCSS
+  ## SMACSS
+  ## SUIT
+  ## BEM
+  ## North
+</section>
+
+<section data-markdown>
+  ## Sass
+  ## Less
+  ## Stylus
+</section>
+
+<section data-markdown>
+  ## Compass
+  ## Bourbon
+</section>
+
+<section data-markdown>
+  ## Bootstrap
+  ## Inuit
+  ## Susy
+  ## Singularity
+</section>
+
+<section>
+  <img src="img/augustus.jpg">
+</section>
+
+<section data-markdown>
+  ## The basics
+  Solid, scalable, maintainable CSS architecture.
+</section>
+
+<section data-markdown>
+  ## app.scss
+</section>
+
+<section data-markdown>
+### app.scss
+```scss
+@import "vendor/normalize.css"
+@import "base"
+@import "components/*"
+```
+</section>
+
+<section data-markdown>
+  ## [Normalize.css](http://necolas.github.io/normalize.css/)
+  Starts us on a level playing field.
+</section>
+
+<section data-markdown>
+## _base.scss
+```scss
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+a {
+  color: green;
+}
+```
+</section>
+
+<section data-markdown>
+  # Components
+</section>
+
+<section data-markdown>
+```
+.page {}
+.header {}
+.comment-box {}
+.avatar {}
+```
+</section>
+
+<section data-markdown>
+  #### Rule #1
+  ### Each component has its own file
+</section>
+
+<section data-markdown>
+```bash
+components/
+  _avatar.scss
+  _comment_box.scss
+  _header.scss
+  _page.scss
+```
+</section>
+
+<section>
+Keep components directory flat
+<br><br>
+When I see<br>
+<code>&lt;div class="comment-box"&gt;</code>
+<br><br>
+I know its styles are in<br>
+<code>components/_comment_box.scss</code>
+<br><br>
+(kinda makes source maps redundant)
+</section>
+
+<section data-markdown>
+  #### Rule #2
+  ### A component has no knowledge of its context
+</section>
+
+<section>
+  <div class="b-page">
+    <div class="b-page__content">
+      <div class="b-page__sidebar">
+        <div class="b-avatar"></div>
+      </div>
+      <div class="b-page__main">
+        <div class="b-page__post">
+          <div class="b-avatar--post"></div>
+        </div>
+
+        <div class="b-page__post">
+          <div class="b-avatar--post"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-markdown>
+```scss
+.avatar {
+  display: block;
+
+  > img {
+    display: block;
+    max-width: 100%;
+  }
+}
+```
+</section>
+
+<section data-markdown>
+  #### Rule #3
+  ### Components can have subcomponents
+</section>
+
+<section data-markdown>
+```scss
+// components/_comment_box.scss
+.comment-box__avatar { ... }
+```
+
+```scss
+// components/_profile_box.scss
+.profile-box__avatar { ... }
+```
+</section>
+
+<section data-markdown>
+```html
+&lt;div class=&quot;comment-box&quot;&gt;
+  &lt;div class=&quot;comment-box__avatar&quot;&gt;
+    
+    &lt;a class=&quot;avatar&quot; href=&quot;#&quot;&gt;
+      &lt;img src=&quot;...&quot;&gt;
+    &lt;/a&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+```
+</section>
+
+<section data-markdown>
+```html
+&lt;div class=&quot;comment-box&quot;&gt;
+  &lt;div class=&quot;comment-box__avatar&quot;&gt;
+    
+    &lt;Avatar /&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+```
+</section>
+
+<section data-markdown>
+```css
+.comment-box__avatar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 50px;
+  width: 50px;
+}
+```
+</section>
+
+<section data-markdown>
+  #### Rule #4
+  ### Minimise depth of applicibility
+</section>
+
+<section data-markdown>
+```scss
+.comment-box {
+  a {
+    color: blue;
+  }
+}
+```
+</section>
+
+<section data-markdown>
+```scss
+.comment-box {
+  > a {
+    color: blue;
+  }
+}
+```
+</section>
+
+<section data-markdown>
+  #### Rule #5
+  ### Components should be small & disposable
+</section>
+
+<section data-markdown>
+  If a class doesn't fit on a 27" monitor without scrolling, it's too big!
+</section>
+
+<section data-markdown>
+```
+.comment-box {
+  ...
+}
+
+.comment-box__avatar {
+  ...
+  a {
+    ...
+  }
+  img {
+    ...
+  }
+}
+```
+</section>
+
+<section data-markdown>
+  # Summary
+</section>
+
+<section data-markdown>
+  ### Everything is a component
+</section>
+
+<section data-markdown>
+  ### Each component has its own file
+</section>
+
+<section data-markdown>
+  ### A component knows nothing about its context
+</section>
+
+<section data-markdown>
+  ### Create sized, positioned containers for other components with subcomponents
+</section>
+
+<section data-markdown>
+  ### Make small, disposable components
+</section>
+
+<section data-markdown>
+```bash
+stylesheets/
+  app.scss
+  _base.scss
+  vendor/
+    normalize.css
+  components/
+    _comment_box.scss
+    _header.scss
+    _page.scss
+    ...
+```
+</section>
+
+<section data-markdown>
+  # Thanks!
+  [@bensmithett](https://twitter.com/bensmithett)
+</section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
