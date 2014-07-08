@@ -55,6 +55,29 @@
 </section>
 
 <section data-markdown>
+## Isomorphic JavaScript
+</section>
+
+<section data-markdown>
+![](img/airbnb.png)
+</section>
+
+<section data-markdown>
+### Isomorphic JavaScript
+
+Shared JavaScript that runs on both the client & server
+</section>
+
+<section data-markdown>
+### "Holy Grail" web app
+
+- On first page load, serve real server-rendered HTML
+- Client-side JS app bootstraps on top of server-rendered HTML
+  - rather than bootstrapping into an empty div
+- From that point on, it's a client-side JS app
+</section>
+
+<section data-markdown>
 ## [React](http://facebook.github.io/react/)
 
 A JavaScript library for building user interfaces
@@ -83,7 +106,7 @@ var HiButton = React.createClass({
 
 <section>
 <pre>
-<code>react.renderComponent(&lt;HiButton name="Ben" /&gt;, document.body);</code>
+<code>React.renderComponent(&lt;HiButton name="Ben" /&gt;, document.body);</code>
 </pre>
 
 <p id="example1"></p>
@@ -117,7 +140,7 @@ var HiButton = React.createClass({
 
 <section data-markdown>
 ```
-react.renderComponentToString(&lt;HiButton name="Ben" /&gt;);
+React.renderComponentToString(&lt;HiButton name="Ben" /&gt;);
 ```
 
 returns this string...
@@ -299,37 +322,18 @@ Server-rendered view
 </section>
 
 <section data-markdown>
-![](img/airbnb.png)
-</section>
-
-<section data-markdown>
-### Isomorphic JavaScript
-
-Shared JavaScript that runs on both the client & server
-</section>
-
-<section data-markdown>
-### "Holy Grail" web app
-
-- Serve real server-rendered HTML
-- Client-side JS app bootstraps on top of server-rendered HTML
-  - rather than bootstrapping into an empty div
-- From that point on, it's a client-side JS app
-</section>
-
-<section data-markdown>
 Server
 
 ```
 &lt;body&gt;
-  &lt;%= React.renderComponentToString(&lt;PizzaButton /&gt;); %&gt;
+  &lt;%= React.renderComponentToString(&lt;UserProfileView /&gt;); %&gt;
 &lt;/body&gt;
 ```
 
 Browser
 
 ```
-React.renderComponent(&lt;PizzaButton /&gt;, document.body);
+React.renderComponent(&lt;UserProfileView /&gt;, document.body);
 ```
 
 When browser-React encounters HTML rendered by server-React, it just adds event listeners.
@@ -368,9 +372,11 @@ https://github.com/reactjs/react-rails
 <section data-markdown>
 #### Bonus! Free progressive enhancement!
 
-Every component can be rendered in any state on the server.
+- You can render a view on the server based on application state at any point in time.
 
-If something goes wrong in the browser, just fall back to a full page load.
+- If something goes wrong in the browser, no worries! Submit a form, click a link...
+
+- The server will render the app in exactly the same state as the client JS would have.
 </section>
 
 <section data-markdown>
@@ -381,6 +387,12 @@ live demo time...
 # Thanks!
 
 [@bensmithett](https://twitter.com/bensmithett)
+
+-----
+
+We're hiring awesome developers!
+
+[envato.com/careers](http://www.envato.com/careers)
 
 -----
 
