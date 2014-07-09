@@ -1,4 +1,4 @@
-css-architecture-on-a-shoestring
+Going Isomorphic with React
 ================================
 
-Slides from my Decompress presentation
+Slides from a presentation I gave at MelbJS in July 2014
